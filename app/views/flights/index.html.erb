@@ -1,0 +1,64 @@
+<%= form_tag flights_path, method: :get do %>
+  <div>
+    <%= label_tag :departure_airport_id, "Departure Airport-" %><br>
+    <%= select_tag :departure_airport_id, options_for_select(@airports.map { |a| [a.code, a.id] }) %><br>
+  </div>
+
+  <div>
+    <%= label_tag :arrival_airport_id, "Arrival Airport-" %><br>
+    <%= select_tag :arrival_airport_id, options_for_select(@airports.map { |a| [a.code, a.id] }) %><br>
+  </div>
+
+  <div>
+    <%= label_tag :passenger_count, "Number of Passengers-" %><br>
+    <%= select_tag :passenger_count, options_for_select(1..4) %><br>
+  </div>
+
+  <div>
+    <%= label_tag :flight_date, "Flight Date-" %><br>
+    <%= select_date(Date.today, field_name: :flight_date, order: [:year, :month, :day], dates: @dates_with_flights) %><br>
+  </div><br>
+
+  <div>
+    <%= submit_tag "Search Flights" %>
+  </div>
+<% end %>
+
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+</style>
+
+<table>
+  <thead>
+    <tr>
+      <th>Departure</th>
+      <th>Arrival</th>
+      <th>Start Date</th>
+      <th>Duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @flights.each do |flight| %>
+      <tr>
+        <td><%= flight.departure_airport.code %></td>
+        <td><%= flight.arrival_airport.code %></td>
+        <td><%= flight.start_datetime %></td>
+        <td><%= flight.duration %> minutes</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
