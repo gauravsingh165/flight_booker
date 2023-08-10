@@ -1,64 +1,53 @@
-<%= form_tag flights_path, method: :get do %>
-  <div>
-    <%= label_tag :departure_airport_id, "Departure Airport-" %><br>
-    <%= select_tag :departure_airport_id, options_for_select(@airports.map { |a| [a.code, a.id] }) %><br>
-  </div>
 
-  <div>
-    <%= label_tag :arrival_airport_id, "Arrival Airport-" %><br>
-    <%= select_tag :arrival_airport_id, options_for_select(@airports.map { |a| [a.code, a.id] }) %><br>
-  </div>
+<div class="container">
+  <div class="content">
+  <%= form_tag flights_path, method: :get do %>
+    <div>
+      <%= label_tag :departure_airport_id, "Departure Airport-" %>
+      <%= select_tag :departure_airport_id, options_for_select(@airports.map { |a| [a.code, a.id] }) %>
+    </div><br>
 
-  <div>
-    <%= label_tag :passenger_count, "Number of Passengers-" %><br>
-    <%= select_tag :passenger_count, options_for_select(1..4) %><br>
-  </div>
+    <div>
+      <%= label_tag :arrival_airport_id, "Arrival Airport-" %>
+      <%= select_tag :arrival_airport_id, options_for_select(@airports.map { |a| [a.code, a.id] }) %>
+    </div><br>
 
-  <div>
-    <%= label_tag :flight_date, "Flight Date-" %><br>
-    <%= select_date(Date.today, field_name: :flight_date, order: [:year, :month, :day], dates: @dates_with_flights) %><br>
-  </div><br>
+    <div>
+      <%= label_tag :passenger_count, "Number of Passengers-" %>
+      <%= select_tag :passenger_count, options_for_select(1..4) %>
+    </div><br>
 
-  <div>
-    <%= submit_tag "Search Flights" %>
-  </div>
-<% end %>
+    <div>
+      <%= label_tag :flight_date, "Flight Date-" %>
+      <%= select_date(Date.today, field_name: :flight_date, order: [:year, :month, :day], dates: @dates_with_flights) %>
+    </div><br>
 
-<style>
-  table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-
-  th, td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: left;
-  }
-
-  th {
-    background-color: #f2f2f2;
-  }
-</style>
-
-<table>
-  <thead>
-    <tr>
-      <th>Departure</th>
-      <th>Arrival</th>
-      <th>Start Date</th>
-      <th>Duration</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @flights.each do |flight| %>
+    <div>
+      <%= submit_tag "Search Flights" %>
+    </div>
+  <% end %>
+  <table>
+    <h1>Available Flights</h1>
+    <thead>
       <tr>
-        <td><%= flight.departure_airport.code %></td>
-        <td><%= flight.arrival_airport.code %></td>
-        <td><%= flight.start_datetime %></td>
-        <td><%= flight.duration %> minutes</td>
+        <th>Departure</th>
+        <th>Arrival</th>
+        <th>Start Date</th>
+        <th>Duration</th>
+        <th>Action</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-
+    </thead>
+    <tbody>
+      <% @flights.each do |flight| %>
+        <tr>
+          <td><%= flight.departure_airport.code %></td>
+          <td><%= flight.arrival_airport.code %></td>
+          <td><%= flight.start_datetime %></td>
+          <td><%= flight.duration %> minutes</td>
+          <td><%= link_to 'Book Flight'%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+</div>

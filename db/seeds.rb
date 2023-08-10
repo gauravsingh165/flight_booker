@@ -14,23 +14,23 @@
 # Flight.create(departure_airport: Airport.first, arrival_airport: Airport.last, start_datetime: Time.now, duration: 180)
 # Add more flights as needed
 # Create airports
-sfo = Airport.create(code: 'SFO')
-nyc = Airport.create(code: 'NYC')
+sfo = Airport.create(code: 'mumbai')
+nyc = Airport.create(code: 'delhi')
 # Add more airports as needed
 
 # Create flights
 Flight.create(
   departure_airport: sfo,
   arrival_airport: nyc,
-  start_datetime: DateTime.new(2024, 8, 15, 10, 0),
-  duration: 360,
+  start_datetime: DateTime.new(2025, 8, 15, 10, 0),
+  duration: 36,
 #   passenger_count: 150
 )
 Flight.create(
   departure_airport: nyc,
   arrival_airport: sfo,
-  start_datetime: DateTime.new(2025, 8, 20, 14, 30),
-  duration: 360,
+  start_datetime: DateTime.new(2026, 8, 20, 14, 30),
+  duration: 36,
 #   passenger_count: 180
 )
 # Add more flights as needed
